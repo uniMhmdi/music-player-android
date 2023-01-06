@@ -1,13 +1,16 @@
 package com.example.musicplayer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.musicplayer.api.RetrofitClient;
 import com.example.musicplayer.api.RetrofitInterface;
 import com.example.musicplayer.models.Song;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,29 +30,32 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         init();
-//        getMusics();
+        getMusics();
 
     }
 
     private void getMusics() {
-        retrofitInterface.getMusics().enqueue(new Callback<List<Song>>() {
+        retrofitInterface.getLatestMusics().enqueue(new Callback<Object>() {
             @Override
-            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+            public void onResponse(Call<Object> call, @NonNull Response<Object> response) {
+                Toast.makeText(HomeActivity.this, "ارتباط برقرار شد", Toast.LENGTH_SHORT).show();
                 if (response.body() != null) {
-                    for (Song music : response.body()) {
-//                        adapter.addMusic(music);
-                    }
+//                    for (Song song : response.body()) {
+////                        adapter.addMusic(music);
+//                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Song>> call, Throwable t) {
-                Toast.makeText(HomeActivity.this, "ارتباط شما با سرور برقرار نشد", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Object> call, Throwable t) {
+                Toast.makeText(HomeActivity.this, "ارتباط شما با سرور برقرار نشد!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void init() {
+        retrofitInterface = RetrofitClient.getClient().create(RetrofitInterface.class);
+        list = new ArrayList<>();
 
     }
 

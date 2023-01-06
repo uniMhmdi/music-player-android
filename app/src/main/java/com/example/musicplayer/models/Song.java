@@ -7,6 +7,7 @@ public class Song {
     private String playCount;
     private String songText;
     private String releaseDate;
+    private String audioUrl;
 
     public String getSongName() {
         return songName;
@@ -54,5 +55,13 @@ public class Song {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getAudioUrl() {
+        return audioUrl;
+    }
+
+    public void setAudioUrl(String audioUrl) {
+        this.audioUrl = audioUrl;
     }
 }
