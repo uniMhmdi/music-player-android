@@ -23,7 +23,7 @@ public class Song {
     @SerializedName("artists")
     private List<Artist> artistList;
 
-    private Audio audio ;
+    private Audio audio;
 
     public Song(String playCount, int songDuration, String songName, Image coverArt, String releaseDate, List<Artist> artistList, Audio audio) {
         this.playCount = playCount;
@@ -33,6 +33,30 @@ public class Song {
         this.releaseDate = releaseDate;
         this.artistList = artistList;
         this.audio = audio;
+    }
+
+    public String getDurationByFormat() {
+
+        int min = songDuration / 60;
+        int sec = songDuration % 60;
+
+        StringBuilder time = new StringBuilder();
+        if (min < 10) {
+            time.append("0").append(min);
+        } else {
+            time.append(min);
+        }
+
+        time.append(":");
+
+        if (sec < 10) {
+            time.append("0").append(sec);
+        } else {
+            time.append(sec);
+        }
+
+        return time.toString();
+
     }
 
     public String getPlayCount() {

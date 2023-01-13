@@ -6,12 +6,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicplayer.adapter.SongAdapter;
 import com.example.musicplayer.api.RetrofitClient;
 import com.example.musicplayer.api.RetrofitInterface;
 import com.example.musicplayer.models.MyResponse;
 import com.example.musicplayer.models.Song;
-import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,6 +25,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
     private RetrofitInterface retrofitInterface;
+    private RecyclerView latestRv;
+    private SongAdapter latestAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     int i = 0;
                     for (Song song : response.body().getSongs()) {
-                        Log.i(TAG, (i+1)+"th song :");
+                        Log.i(TAG, (i + 1) + "th song :");
                         Log.i(TAG, "play count : " + song.getPlayCount());
                         Log.i(TAG, "duration in second : " + song.getSongDuration());
                         Log.i(TAG, "song name : " + song.getSongName());
@@ -51,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
                         i++;
                         Log.i(TAG, "================================================");
 
-//                        adapter.addMusic(music);
+                        latestAdapter.addSong(song);
                     }
                 }
             }
@@ -65,6 +71,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void init() {
         retrofitInterface = RetrofitClient.getClient().create(RetrofitInterface.class);
+        latestRv = findViewById(R.id.rv_latest);
+        latestRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        latestAdapter = new SongAdapter(new ArrayList<>());
+        latestRv.setAdapter(latestAdapter);
+
 
     }
 

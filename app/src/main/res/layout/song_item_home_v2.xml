@@ -2,15 +2,13 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/_110sdp"
-    android:layout_height="wrap_content"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:background="@color/dark_blue"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_170sdp"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_102sdp"
+        android:orientation="horizontal">
 
         <com.google.android.material.card.MaterialCardView
 
@@ -18,54 +16,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="@dimen/_20sdp"
-            app:cardCornerRadius="@dimen/_4sdp">
+            app:cardCornerRadius="@dimen/_10sdp">
 
             <ImageView
-                android:layout_width="@dimen/_110sdp"
-                android:layout_height="@dimen/_110sdp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:src="@drawable/small_cover" />
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
-            android:gravity="center_horizontal"
+            android:layout_marginStart="@dimen/margin_8sdp"
+            android:layout_toRightOf="@id/container"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp"
                 android:id="@+id/tv_song_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/solomon_sans_bold"
-                android:textSize="@dimen/_12sdp"
                 tools:text="Ghashang Shod" />
 
             <TextView
-                android:textColor="@color/white"
-                android:layout_marginTop="@dimen/margin_8sdp"
-                android:textSize="@dimen/_9sdp"
                 android:id="@+id/tv_artist_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/solomon_sans_bold"
                 tools:text="Hamid Hiraad" />
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_marginBottom="@dimen/margin_8sdp"
-            android:layout_marginTop="@dimen/margin_8sdp"
-            android:id="@+id/container_meta"
+        <LinearLayout
+            android:layout_marginStart="@dimen/margin_8sdp"
+            android:layout_toEndOf="@id/container"
+            android:layout_alignBottom="@id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
             >
 
             <TextView
-                android:textColor="@color/white"
-                android:drawablePadding="@dimen/_3sdp"
-                android:layout_marginStart="@dimen/margin_8sdp"
-                android:textSize="@dimen/_7sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/solomon_sans_bold"
@@ -75,10 +65,6 @@
                 tools:text="520.5 K" />
 
             <TextView
-                android:textColor="@color/white"
-                android:layout_marginEnd="@dimen/margin_8sdp"
-                android:layout_alignParentEnd="true"
-                android:textSize="@dimen/_7sdp"
                 android:layout_marginStart="@dimen/margin_16sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,6 +73,7 @@
                 android:textAlignment="center"
                 tools:text="05:23" />
 
-        </RelativeLayout>
-    </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
