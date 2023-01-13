@@ -32,9 +32,11 @@ public class HomeFragment extends Fragment {
     private RecyclerView latestRv;
     private RecyclerView trendingRv;
     private RecyclerView topDayRv;
+    private RecyclerView topWeekRv;
     private SongAdapter latestAdapter;
     private SongAdapter trendingAdapter;
     private SongAdapter topDayAdapter;
+    private SongAdapter topWeekAdapter;
 
     public HomeFragment() {
     }
@@ -112,6 +114,23 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        retrofitInterface.getTopWeekSongs().enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<MyResponse> call, @NonNull Response<MyResponse> response) {
+                if (response.body() != null) {
+                    for (Song song : response.body().getSongs()) {
+                        topWeekAdapter.addSong(song);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MyResponse> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), "ارتباط شما با سرور برقرار نشد!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void init(View view) {
@@ -119,15 +138,19 @@ public class HomeFragment extends Fragment {
         latestRv = view.findViewById(R.id.rv_latest);
         trendingRv = view.findViewById(R.id.rv_trending_artist);
         topDayRv = view.findViewById(R.id.rv_top10_day);
+        topWeekRv = view.findViewById(R.id.rv_top10_week);
         latestRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         trendingRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         topDayRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        topWeekRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         latestAdapter = new SongAdapter(new ArrayList<>());
         trendingAdapter = new SongAdapter(new ArrayList<>());
         topDayAdapter = new SongAdapter(new ArrayList<>());
+        topWeekAdapter = new SongAdapter(new ArrayList<>());
         latestRv.setAdapter(latestAdapter);
         trendingRv.setAdapter(trendingAdapter);
         topDayRv.setAdapter(topDayAdapter);
+        topWeekRv.setAdapter(topWeekAdapter);
 
 
     }

@@ -19,4 +19,8 @@ public interface RetrofitInterface {
     @GET("v1/song/top/day/0/100")
     Call<MyResponse> getTopDaySongs();
 
+    // get top day songs
+    @GET("v1/song/top/week/0/100")
+    Call<MyResponse> getTopWeekSongs();
+
 }

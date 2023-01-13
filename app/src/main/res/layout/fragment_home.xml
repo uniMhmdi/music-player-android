@@ -15,11 +15,11 @@
 
 
         <TextView
-            android:layout_marginTop="@dimen/_16sdp"
             android:id="@+id/tv_latest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:background="@color/dark_purple"
             android:fontFamily="@font/solomon_sans_bold"
             android:gravity="center"
@@ -85,6 +85,30 @@
             app:layout_constraintEnd_toEndOf="@+id/tv_latest"
             app:layout_constraintStart_toStartOf="@+id/tv_top10_day"
             app:layout_constraintTop_toBottomOf="@+id/tv_top10_day" />
+
+        <TextView
+            android:id="@+id/tv_top10_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/margin_16sdp"
+            android:background="@color/dark_purple"
+            android:fontFamily="@font/solomon_sans_bold"
+            android:gravity="center"
+            android:text="TOP 10 Week"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_top10_day" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_top10_week"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_165sdp"
+            android:layout_marginTop="@dimen/margin_8sdp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_latest"
+            app:layout_constraintStart_toStartOf="@+id/tv_top10_week"
+            app:layout_constraintTop_toBottomOf="@+id/tv_top10_week" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
