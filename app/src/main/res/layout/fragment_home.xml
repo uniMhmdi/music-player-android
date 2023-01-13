@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    tools:background="@color/white"
+    tools:context=".HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".HomeActivity">
+
+
+        <TextView
+            android:layout_marginTop="@dimen/_16sdp"
+            android:id="@+id/tv_latest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@color/dark_purple"
+            android:fontFamily="@font/solomon_sans_bold"
+            android:gravity="center"
+            android:text="Latest"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_latest"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_165sdp"
+            android:layout_marginTop="@dimen/margin_8sdp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_latest"
+            app:layout_constraintStart_toStartOf="@+id/tv_latest"
+            app:layout_constraintTop_toBottomOf="@+id/tv_latest" />
+
+        <TextView
+            android:id="@+id/tv_trending_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/margin_16sdp"
+            android:background="@color/dark_purple"
+            android:fontFamily="@font/solomon_sans_bold"
+            android:gravity="center"
+            android:text="Trending Artist"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_latest" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_trending_artist"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_165sdp"
+            android:layout_marginTop="@dimen/margin_8sdp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_latest"
+            app:layout_constraintStart_toStartOf="@+id/tv_trending_artist"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trending_artist" />
+
+        <TextView
+            android:id="@+id/tv_top10_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/margin_16sdp"
+            android:background="@color/dark_purple"
+            android:fontFamily="@font/solomon_sans_bold"
+            android:gravity="center"
+            android:text="TOP 10 Day"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_trending_artist" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_top10_day"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_165sdp"
+            android:layout_marginTop="@dimen/margin_8sdp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_latest"
+            app:layout_constraintStart_toStartOf="@+id/tv_top10_day"
+            app:layout_constraintTop_toBottomOf="@+id/tv_top10_day" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+
