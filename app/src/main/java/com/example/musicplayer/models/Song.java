@@ -1,10 +1,13 @@
 package com.example.musicplayer.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Song {
+public class Song implements Parcelable {
 
     @SerializedName("downloadCount")
     private String playCount;
@@ -114,4 +117,52 @@ public class Song {
     public void setAudio(Audio audio) {
         this.audio = audio;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.playCount);
+        dest.writeInt(this.songDuration);
+        dest.writeString(this.songName);
+        dest.writeParcelable(this.coverArt, flags);
+        dest.writeString(this.releaseDate);
+        dest.writeTypedList(this.artistList);
+        dest.writeParcelable(this.audio, flags);
+    }
+
+    public void readFromParcel(Parcel source) {
+        this.playCount = source.readString();
+        this.songDuration = source.readInt();
+        this.songName = source.readString();
+        this.coverArt = source.readParcelable(Image.class.getClassLoader());
+        this.releaseDate = source.readString();
+        this.artistList = source.createTypedArrayList(Artist.CREATOR);
+        this.audio = source.readParcelable(Audio.class.getClassLoader());
+    }
+
+    protected Song(Parcel in) {
+        this.playCount = in.readString();
+        this.songDuration = in.readInt();
+        this.songName = in.readString();
+        this.coverArt = in.readParcelable(Image.class.getClassLoader());
+        this.releaseDate = in.readString();
+        this.artistList = in.createTypedArrayList(Artist.CREATOR);
+        this.audio = in.readParcelable(Audio.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Song> CREATOR = new Parcelable.Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel source) {
+            return new Song(source);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
 }

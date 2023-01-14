@@ -1,5 +1,6 @@
 package com.example.musicplayer.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer.R;
+import com.example.musicplayer.SongDetailActivity;
 import com.example.musicplayer.models.Song;
+import com.example.musicplayer.utils.Constant;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
@@ -51,7 +55,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         return songList.size();
     }
 
-    public static class SongViewHolder extends RecyclerView.ViewHolder {
+    public class SongViewHolder extends RecyclerView.ViewHolder {
         public ImageView coverIv;
         public TextView songNameTv;
         public TextView artistNameTv;
@@ -65,6 +69,16 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             artistNameTv = itemView.findViewById(R.id.tv_artist_name);
             downloadCountTv = itemView.findViewById(R.id.tv_download_count);
             durationTv = itemView.findViewById(R.id.tv_duration);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), SongDetailActivity.class);
+                    intent.putParcelableArrayListExtra(Constant.SONG_LIST_EXTRA_KEY,(ArrayList<Song>)songList) ;
+                    intent.putExtra(Constant.SONG_POSITION_EXTRA_KEY,getAdapterPosition()) ;
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
