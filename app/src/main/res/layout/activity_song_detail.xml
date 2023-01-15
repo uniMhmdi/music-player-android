@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:backgroundTint="@color/dark_blue">
 
     <View
         android:id="@+id/view_supporter_for_background"
@@ -29,6 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#eeeeee"
+        android:backgroundTint="@color/dark_purple"
         app:layout_constraintBottom_toTopOf="@id/view_supporter_for_cover"
         app:layout_constraintEnd_toStartOf="@id/view_supporter_for_cover"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#eeeeee"
+        android:backgroundTint="@color/dark_purple"
         app:layout_constraintBottom_toTopOf="@id/view_supporter_for_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/view1"
@@ -59,7 +62,7 @@
     <ImageView
         android:id="@+id/iv_cover"
         android:layout_width="200dp"
-        android:layout_height="260dp"
+        android:layout_height="240dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/view_supporter_for_cover"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,10 +74,12 @@
         android:id="@+id/tv_song_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16sdp"
+        android:layout_marginTop="@dimen/margin_8sdp"
+        android:ellipsize="end"
         android:fontFamily="@font/solomon_sans_bold"
         android:gravity="center"
-        android:textColor="@color/design_default_color_primary_variant"
+        android:maxLines="1"
+        android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/iv_cover"
@@ -84,9 +89,11 @@
         android:id="@+id/tv_artist_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
         android:fontFamily="@font/solomon_sans_bold"
         android:gravity="center"
-        android:textColor="@color/design_default_color_on_secondary"
+        android:maxLines="1"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/tv_song_name"
         tools:text="Hamid Hirad" />
@@ -95,27 +102,30 @@
         android:id="@+id/iv_back"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
+        android:layout_margin="@dimen/margin_8sdp"
         android:contentDescription="@string/app_name"
         android:rotation="-90"
+        android:src="@drawable/ic_up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/margin_8sdp"
-        android:src="@drawable/ic_up" />
+        app:tint="@color/white" />
 
     <ImageView
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
+        android:layout_margin="@dimen/margin_8sdp"
         android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_more_vert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/margin_8sdp"
-        android:src="@drawable/ic_more_vert" />
+        app:tint="@color/white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/player_background"
+        android:backgroundTint="@color/dark_purple"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
@@ -126,7 +136,8 @@
             android:contentDescription="@string/app_name"
             android:fontFamily="@font/solomon_sans_bold"
             android:gravity="center"
-            android:text="shab shod o setare dar omad"
+            android:text="Lyrics"
+            android:textColor="@color/white"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -192,7 +203,8 @@
             android:src="@drawable/ic_shuffle"
             app:layout_constraintBottom_toBottomOf="@id/ib_play_puase"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ib_play_puase" />
+            app:layout_constraintTop_toTopOf="@id/ib_play_puase"
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/ib_repeat"
@@ -204,7 +216,8 @@
             android:src="@drawable/ic_repeat"
             app:layout_constraintBottom_toBottomOf="@id/ib_play_puase"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ib_play_puase" />
+            app:layout_constraintTop_toTopOf="@id/ib_play_puase"
+            app:tint="@color/white" />
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/seekbar_player"
@@ -215,7 +228,9 @@
             android:layout_marginBottom="@dimen/_3sdp"
             android:contentDescription="@string/app_name"
             android:progress="0"
+            android:progressDrawable="@drawable/seek_bar"
             android:theme="@style/seekBarTheme"
+            android:thumb="@drawable/seek_thumb"
             app:layout_constraintBottom_toTopOf="@id/ib_play_puase" />
 
         <TextView
@@ -227,12 +242,12 @@
             android:layout_marginBottom="@dimen/_3sdp"
             android:contentDescription="@string/app_name"
             android:fontFamily="@font/solomon_sans_bold"
-            tools:text="01:37"
             android:textColor="@color/orange"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintBottom_toTopOf="@id/seekbar_player"
             app:layout_constraintStart_toStartOf="@id/seekbar_player"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="01:37" />
 
         <TextView
             android:id="@+id/tv_total_time"
@@ -243,12 +258,12 @@
             android:layout_marginBottom="@dimen/_3sdp"
             android:contentDescription="@string/app_name"
             android:fontFamily="@font/solomon_sans_bold"
-            tools:text="04:30"
             android:textColor="@color/orange"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintBottom_toTopOf="@id/seekbar_player"
             app:layout_constraintEnd_toEndOf="@id/seekbar_player"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="04:30" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

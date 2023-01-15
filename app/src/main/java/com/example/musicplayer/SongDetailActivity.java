@@ -70,13 +70,17 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
         durationTv = findViewById(R.id.tv_total_time);
         currentDurationTv = findViewById(R.id.tv_current_time);
         appCompatSeekBar = findViewById(R.id.seekbar_player);
-        prevIv = findViewById(R.id.ib_next);
-        nextIv = findViewById(R.id.ib_prev);
+        nextIv = findViewById(R.id.ib_next);
+        prevIv = findViewById(R.id.ib_prev);
         shuffleIv = findViewById(R.id.ib_shuffle);
         repeatIv = findViewById(R.id.ib_repeat);
         playPauseIb = findViewById(R.id.ib_play_puase);
 
         mediaPlayer = new MediaPlayer();
+        setupSongPlayer();
+    }
+
+    private void setupSongPlayer() {
         try {
             mediaPlayer.setDataSource(currentSong.getAudio().getMedium().getUrl());
             mediaPlayer.prepareAsync();
@@ -103,7 +107,7 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
                                 updateSeekBarTime(mediaPlayer.getCurrentPosition(), currentDurationTv);
 
                                 if (durationTv.getText().equals(currentDurationTv.getText())) {
-                                    // TODO: 2023-01-14 next song will play
+                                    playNextSong(mediaPlayer);
                                 }
                             });
 
@@ -111,6 +115,7 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
                     }, 1000, 1000);
 
                     mediaPlayer.start();
+                    playPauseIb.setImageResource(R.drawable.ic_pause);
 
                     appCompatSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
@@ -134,11 +139,11 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
                     });
 
                     prevIv.setOnClickListener(v -> {
-                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 5000);
+                        playPrevSong(mediaPlayer);
                     });
 
                     nextIv.setOnClickListener(v -> {
-                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 10000);
+                        playNextSong(mediaPlayer);
                     });
 
                     playPauseIb.setOnClickListener(v -> {
@@ -148,7 +153,6 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
                         } else {
                             mediaPlayer.start();
                             playPauseIb.setImageResource(R.drawable.ic_pause);
-
                         }
                     });
 
@@ -158,6 +162,40 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
             Toast.makeText(this, "خطایی رخ داد ، بعدا تلاش کنید", Toast.LENGTH_SHORT).show();
             finish();
             e.printStackTrace();
+        }
+    }
+
+    private void checkPlaying(MediaPlayer mediaPlayer) {
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        }
+    }
+
+    private void playPrevSong(MediaPlayer mediaPlayer) {
+        currentPosition--;
+        if (currentPosition >= 0) {
+            currentSong = songList.get(currentPosition);
+            checkPlaying(mediaPlayer);
+            mediaPlayer.reset();
+            setupSongPlayer();
+        } else {
+            Toast.makeText(this, "ابتدای پلی لیست هستیم!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void playNextSong(MediaPlayer mediaPlayer) {
+        currentPosition++;
+        if (currentPosition < songList.size()) {
+            currentSong = songList.get(currentPosition);
+            checkPlaying(mediaPlayer);
+            mediaPlayer.reset();
+            setupSongPlayer();
+        } else {
+            playPauseIb.setImageResource(R.drawable.ic_play);
+            appCompatSeekBar.setProgress(0);
+            updateSeekBarTime(0, currentDurationTv);
+            releaseResource();
+            Toast.makeText(this, "به انتهای لیست رسیدیم،هیچ آهنگی در لیست نیست", Toast.LENGTH_SHORT).show();
         }
     }
 

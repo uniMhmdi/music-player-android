@@ -2,4 +2,7 @@
 <resources>
     <dimen name="margin_8sdp">@dimen/_8sdp</dimen>
     <dimen name="margin_16sdp">@dimen/_16sdp</dimen>
+
+    <dimen name="seek_bar_thickness">3dp</dimen>
+    <dimen name="seek_bar_thumb_size">20dp</dimen>
 </resources>
