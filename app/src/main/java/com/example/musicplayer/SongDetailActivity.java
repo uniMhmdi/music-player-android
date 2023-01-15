@@ -9,9 +9,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSeekBar;
 
+import com.example.musicplayer.api.RetrofitClient;
+import com.example.musicplayer.api.RetrofitInterface;
 import com.example.musicplayer.models.Song;
 import com.example.musicplayer.utils.Constant;
 import com.squareup.picasso.Picasso;
@@ -21,7 +24,14 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SongDetailActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private RetrofitInterface retrofitInterface ;
+    private String lyrics ;
 
     private ImageView backIv;
     private ImageView coverIV;
@@ -65,6 +75,7 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void init() {
+        retrofitInterface = RetrofitClient.getClient().create(RetrofitInterface.class);
         backIv = findViewById(R.id.iv_back);
         coverIV = findViewById(R.id.iv_cover);
         songNameTv = findViewById(R.id.tv_song_name);
@@ -86,6 +97,21 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
 
     private void setupSongPlayer() {
         try {
+            lyrics = null ;
+            retrofitInterface.getLyricSong(currentSong.getId()).enqueue(new Callback<Song>() {
+                @Override
+                public void onResponse(@NonNull Call<Song> call, @NonNull Response<Song> response) {
+                    if(response.body() != null){
+                        lyrics = response.body().getLyrics() ;
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Song> call, @NonNull Throwable t) {
+                    Toast.makeText(SongDetailActivity.this, "خطا در گرفتن متن موزیک", Toast.LENGTH_SHORT).show();
+                }
+            });
+
             mediaPlayer.setDataSource(currentSong.getAudio().getMedium().getUrl());
             mediaPlayer.prepareAsync();
 

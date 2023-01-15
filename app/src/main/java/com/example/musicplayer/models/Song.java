@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Song implements Parcelable {
+    private String id;
 
     @SerializedName("downloadCount")
     private String playCount;
@@ -28,7 +29,11 @@ public class Song implements Parcelable {
 
     private Audio audio;
 
-    public Song(String playCount, int songDuration, String songName, Image coverArt, String releaseDate, List<Artist> artistList, Audio audio) {
+    private String lyrics;
+
+
+    public Song(String playCount, int songDuration, String songName, Image coverArt, String releaseDate, List<Artist> artistList, Audio audio, String id, String lyrics) {
+        this.lyrics = lyrics;
         this.playCount = playCount;
         this.songDuration = songDuration;
         this.songName = songName;
@@ -36,6 +41,7 @@ public class Song implements Parcelable {
         this.releaseDate = releaseDate;
         this.artistList = artistList;
         this.audio = audio;
+        this.id = id;
     }
 
     public String getDurationByFormat() {
@@ -118,6 +124,15 @@ public class Song implements Parcelable {
         this.audio = audio;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -125,6 +140,7 @@ public class Song implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
         dest.writeString(this.playCount);
         dest.writeInt(this.songDuration);
         dest.writeString(this.songName);
@@ -135,6 +151,7 @@ public class Song implements Parcelable {
     }
 
     public void readFromParcel(Parcel source) {
+        this.id = source.readString();
         this.playCount = source.readString();
         this.songDuration = source.readInt();
         this.songName = source.readString();
@@ -145,6 +162,7 @@ public class Song implements Parcelable {
     }
 
     protected Song(Parcel in) {
+        this.id = in.readString();
         this.playCount = in.readString();
         this.songDuration = in.readInt();
         this.songName = in.readString();
@@ -165,4 +183,12 @@ public class Song implements Parcelable {
             return new Song[size];
         }
     };
+
+    public String getLyrics() {
+        return lyrics;
+    }
+
+    public void setLyrics(String lyrics) {
+        this.lyrics = lyrics;
+    }
 }

@@ -1,10 +1,12 @@
 package com.example.musicplayer.api;
 
 import com.example.musicplayer.models.ArtistsResponse;
+import com.example.musicplayer.models.Song;
 import com.example.musicplayer.models.SongsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface RetrofitInterface {
 
@@ -20,8 +22,12 @@ public interface RetrofitInterface {
     @GET("v1/song/top/day/0/100")
     Call<SongsResponse> getTopDaySongs();
 
-    // get top day songs
+    // get top week songs
     @GET("v1/song/top/week/0/100")
     Call<SongsResponse> getTopWeekSongs();
+
+    // get top week songs
+    @GET("v1/song/{id}")
+    Call<Song> getLyricSong(@Path("id") String songId);
 
 }
