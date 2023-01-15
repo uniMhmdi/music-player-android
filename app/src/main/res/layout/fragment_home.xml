@@ -56,7 +56,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_trending_artist"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_165sdp"
+            android:layout_height="@dimen/_340sdp"
             android:layout_marginTop="@dimen/margin_8sdp"
             app:layout_constraintEnd_toEndOf="@+id/tv_latest"
             app:layout_constraintStart_toStartOf="@+id/tv_trending_artist"

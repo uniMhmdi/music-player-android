@@ -9,14 +9,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicplayer.adapter.ArtistAdapter;
 import com.example.musicplayer.adapter.SongAdapter;
 import com.example.musicplayer.api.RetrofitClient;
 import com.example.musicplayer.api.RetrofitInterface;
-import com.example.musicplayer.models.MyResponse;
+import com.example.musicplayer.models.ArtistsResponse;
 import com.example.musicplayer.models.Song;
+import com.example.musicplayer.models.SongsResponse;
+import com.example.musicplayer.models.TrendArtist;
 
 import java.util.ArrayList;
 
@@ -34,7 +38,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView topDayRv;
     private RecyclerView topWeekRv;
     private SongAdapter latestAdapter;
-    private SongAdapter trendingAdapter;
+    private ArtistAdapter trendingAdapter;
     private SongAdapter topDayAdapter;
     private SongAdapter topWeekAdapter;
 
@@ -65,9 +69,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void getMusics() {
-        retrofitInterface.getLatestSongs().enqueue(new Callback<MyResponse>() {
+        retrofitInterface.getLatestSongs().enqueue(new Callback<SongsResponse>() {
             @Override
-            public void onResponse(@NonNull Call<MyResponse> call, @NonNull Response<MyResponse> response) {
+            public void onResponse(@NonNull Call<SongsResponse> call, @NonNull Response<SongsResponse> response) {
                 if (response.body() != null) {
                     int i = 0;
                     for (Song song : response.body().getSongs()) {
@@ -77,30 +81,30 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<MyResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<SongsResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "ارتباط شما با سرور برقرار نشد!", Toast.LENGTH_SHORT).show();
             }
         });
 
-//        retrofitInterface.getTrendingArtist().enqueue(new Callback<MyResponse>() {
-//            @Override
-//            public void onResponse(@NonNull Call<MyResponse> call, @NonNull Response<MyResponse> response) {
-//                if (response.body() != null) {
-//                    for (Song song : response.body().getSongs()) {
-//                        trendingAdapter.addSong(song);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<MyResponse> call, @NonNull Throwable t) {
-//                Toast.makeText(HomeActivity.this, "ارتباط شما با سرور برقرار نشد!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-        retrofitInterface.getTopDaySongs().enqueue(new Callback<MyResponse>() {
+        retrofitInterface.getTrendingArtist().enqueue(new Callback<ArtistsResponse>() {
             @Override
-            public void onResponse(@NonNull Call<MyResponse> call, @NonNull Response<MyResponse> response) {
+            public void onResponse(@NonNull Call<ArtistsResponse> call, @NonNull Response<ArtistsResponse> response) {
+                if (response.body() != null) {
+                    for (TrendArtist artist : response.body().getTrendArtistList()) {
+                        trendingAdapter.addArtist(artist);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArtistsResponse> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), "ارتباط شما با سرور برقرار نشد!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        retrofitInterface.getTopDaySongs().enqueue(new Callback<SongsResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SongsResponse> call, @NonNull Response<SongsResponse> response) {
                 if (response.body() != null) {
                     for (Song song : response.body().getSongs()) {
                         topDayAdapter.addSong(song);
@@ -109,15 +113,15 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<MyResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<SongsResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "ارتباط شما با سرور برقرار نشد!", Toast.LENGTH_SHORT).show();
 
             }
         });
 
-        retrofitInterface.getTopWeekSongs().enqueue(new Callback<MyResponse>() {
+        retrofitInterface.getTopWeekSongs().enqueue(new Callback<SongsResponse>() {
             @Override
-            public void onResponse(@NonNull Call<MyResponse> call, @NonNull Response<MyResponse> response) {
+            public void onResponse(@NonNull Call<SongsResponse> call, @NonNull Response<SongsResponse> response) {
                 if (response.body() != null) {
                     for (Song song : response.body().getSongs()) {
                         topWeekAdapter.addSong(song);
@@ -126,7 +130,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<MyResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<SongsResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "ارتباط شما با سرور برقرار نشد!", Toast.LENGTH_SHORT).show();
 
             }
@@ -140,11 +144,11 @@ public class HomeFragment extends Fragment {
         topDayRv = view.findViewById(R.id.rv_top10_day);
         topWeekRv = view.findViewById(R.id.rv_top10_week);
         latestRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        trendingRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        trendingRv.setLayoutManager(new GridLayoutManager(view.getContext(), 2, LinearLayoutManager.HORIZONTAL, false));
         topDayRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         topWeekRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         latestAdapter = new SongAdapter(new ArrayList<>());
-        trendingAdapter = new SongAdapter(new ArrayList<>());
+        trendingAdapter = new ArtistAdapter(new ArrayList<>());
         topDayAdapter = new SongAdapter(new ArrayList<>());
         topWeekAdapter = new SongAdapter(new ArrayList<>());
         latestRv.setAdapter(latestAdapter);

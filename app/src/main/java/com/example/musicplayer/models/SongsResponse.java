@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class MyResponse {
+public class SongsResponse {
     @SerializedName("results")
     private List<Song> songs;
 
-    public MyResponse(List<Song> songs) {
+    public SongsResponse(List<Song> songs) {
         this.songs = songs;
     }
 
