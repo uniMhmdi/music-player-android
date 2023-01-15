@@ -47,17 +47,17 @@
         app:layout_constraintStart_toEndOf="@id/view1"
         app:layout_constraintTop_toBottomOf="@id/view1" />
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="200dp"
-            android:layout_height="240dp"
-            android:id="@+id/iv_cover"
-            android:src="@drawable/small_cover"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@id/view_supporter_for_cover"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/view_supporter_for_cover"
-            app:riv_corner_radius="12dp"/>
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="200dp"
+        android:layout_height="240dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/small_cover"
+        app:layout_constraintBottom_toBottomOf="@id/view_supporter_for_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_supporter_for_cover"
+        app:riv_corner_radius="12dp" />
 
 
     <TextView
@@ -142,6 +142,65 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/dark_blue" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16sdp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/ib_lyrics"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ib_lyrics">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/solomon_sans_bold"
+                android:text="Release Date"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_16sdp"
+                android:fontFamily="@font/solomon_sans_bold"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/_10sdp"
+                tools:text="2022-12-23" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_16sdp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/ib_lyrics"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ib_lyrics">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16sdp"
+                android:fontFamily="@font/solomon_sans_bold"
+                android:text="Total Play"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:id="@+id/tv_total_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/solomon_sans_bold"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/_10sdp"
+                tools:text="573.1K" />
+        </LinearLayout>
+
 
         <ImageButton
             android:id="@+id/ib_play_puase"

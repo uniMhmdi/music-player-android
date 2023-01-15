@@ -27,6 +27,8 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
     private ImageView coverIV;
     private TextView songNameTv;
     private TextView artistNameTv;
+    private TextView totalPlayTv;
+    private TextView releaseDateTv;
     private TextView durationTv;
     private TextView currentDurationTv;
     private AppCompatSeekBar appCompatSeekBar;
@@ -67,6 +69,8 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
         coverIV = findViewById(R.id.iv_cover);
         songNameTv = findViewById(R.id.tv_song_name);
         artistNameTv = findViewById(R.id.tv_artist_name);
+        totalPlayTv = findViewById(R.id.tv_total_play);
+        releaseDateTv = findViewById(R.id.tv_release_date);
         durationTv = findViewById(R.id.tv_total_time);
         currentDurationTv = findViewById(R.id.tv_current_time);
         appCompatSeekBar = findViewById(R.id.seekbar_player);
@@ -87,6 +91,8 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
 
             artistNameTv.setText(currentSong.getArtistList().get(0).getFullName());
             songNameTv.setText(currentSong.getSongName());
+            totalPlayTv.setText(currentSong.getPlayCount());
+            releaseDateTv.setText(currentSong.getReleaseDate().substring(0,11));
             Picasso.get().load(currentSong.getCoverArt().getBigCover().getUrl()).into(coverIV);
 
             timer = new Timer();
