@@ -211,36 +211,46 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+
+    private void playNewSong(MediaPlayer mediaPlayer) {
+        currentSong = songList.get(currentPosition);
+        checkPlaying(mediaPlayer);
+        mediaPlayer.reset();
+        releaseTimerTask();
+        setupSongPlayer();
+    }
+
     private void checkPlaying(MediaPlayer mediaPlayer) {
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
         }
     }
 
+    private void releaseTimerTask() {
+        timer.cancel();
+        timer.purge();
+    }
+
     private void playPrevSong(MediaPlayer mediaPlayer) {
-        currentPosition--;
-        if (currentPosition >= 0) {
-            currentSong = songList.get(currentPosition);
-            checkPlaying(mediaPlayer);
-            mediaPlayer.reset();
-            setupSongPlayer();
+
+        if ((currentPosition - 1) >= 0) {
+            currentPosition--;
+            playNewSong(mediaPlayer);
         } else {
             Toast.makeText(this, "ابتدای پلی لیست هستیم!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void playNextSong(MediaPlayer mediaPlayer) {
-        currentPosition++;
-        if (currentPosition < songList.size()) {
-            currentSong = songList.get(currentPosition);
-            checkPlaying(mediaPlayer);
-            mediaPlayer.reset();
-            setupSongPlayer();
+
+        if ((currentPosition + 1) < songList.size()) {
+            currentPosition++;
+            playNewSong(mediaPlayer);
         } else {
             playPauseIb.setImageResource(R.drawable.ic_play);
             appCompatSeekBar.setProgress(0);
             updateSeekBarTime(0, currentDurationTv);
-            releaseResource();
+//            releaseTimerTask();
             Toast.makeText(this, "به انتهای لیست رسیدیم،هیچ آهنگی در لیست نیست", Toast.LENGTH_SHORT).show();
         }
     }
@@ -278,7 +288,6 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
 
     public void releaseResource() {
         mediaPlayer.stop();
-        timer.cancel();
-        timer.purge();
+        releaseTimerTask();
     }
 }
