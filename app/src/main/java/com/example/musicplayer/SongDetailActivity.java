@@ -30,8 +30,9 @@ import retrofit2.Response;
 
 public class SongDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RetrofitInterface retrofitInterface ;
-    private String lyrics ;
+    private RetrofitInterface retrofitInterface;
+    private String lyrics;
+    private LyricBottomSheet bottomSheet;
 
     private ImageView backIv;
     private ImageView coverIV;
@@ -47,6 +48,7 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
     private ImageButton repeatIv;
     private ImageButton shuffleIv;
     private ImageButton playPauseIb;
+    private ImageButton lyricsIb;
     private MediaPlayer mediaPlayer;
     private Timer timer;
 
@@ -90,6 +92,18 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
         shuffleIv = findViewById(R.id.ib_shuffle);
         repeatIv = findViewById(R.id.ib_repeat);
         playPauseIb = findViewById(R.id.ib_play_puase);
+        lyricsIb = findViewById(R.id.ib_lyrics);
+
+        lyricsIb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (lyrics != null && lyrics.length() >= 1) {
+                    new LyricBottomSheet(lyrics).show(getSupportFragmentManager(), "TAG");
+                } else {
+                    Toast.makeText(SongDetailActivity.this, "متن آهنگ موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         mediaPlayer = new MediaPlayer();
         setupSongPlayer();
@@ -97,12 +111,12 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
 
     private void setupSongPlayer() {
         try {
-            lyrics = null ;
+            lyrics = null;
             retrofitInterface.getLyricSong(currentSong.getId()).enqueue(new Callback<Song>() {
                 @Override
                 public void onResponse(@NonNull Call<Song> call, @NonNull Response<Song> response) {
-                    if(response.body() != null){
-                        lyrics = response.body().getLyrics() ;
+                    if (response.body() != null) {
+                        lyrics = response.body().getLyrics();
                     }
                 }
 
@@ -118,7 +132,7 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
             artistNameTv.setText(currentSong.getArtistList().get(0).getFullName());
             songNameTv.setText(currentSong.getSongName());
             totalPlayTv.setText(currentSong.getPlayCount());
-            releaseDateTv.setText(currentSong.getReleaseDate().substring(0,11));
+            releaseDateTv.setText(currentSong.getReleaseDate().substring(0, 11));
             Picasso.get().load(currentSong.getCoverArt().getBigCover().getUrl()).into(coverIV);
 
             timer = new Timer();
