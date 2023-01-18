@@ -22,14 +22,26 @@ import java.util.List;
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
 
     private List<Song> songList;
+    private boolean isSearch;
 
     public SongAdapter(List<Song> songList) {
         this.songList = songList;
     }
 
+    public SongAdapter(List<Song> songList, boolean isSearch) {
+        this.songList = songList;
+        this.isSearch = isSearch;
+    }
+
     @NonNull
     @Override
     public SongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case 0:
+                return new SongViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.song_item_search, parent, false));
+            case 1:
+                return new SongViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.song_item_home, parent, false));
+        }
         return new SongViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.song_item_home, parent, false));
     }
 
@@ -55,6 +67,22 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         return songList.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (isSearch) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public void clear() {
+        for (int i = songList.size() - 1; i >= 0; i--) {
+            songList.remove(i);
+            notifyItemRemoved(i);
+        }
+    }
+
     public class SongViewHolder extends RecyclerView.ViewHolder {
         public ImageView coverIv;
         public TextView songNameTv;
@@ -74,8 +102,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(itemView.getContext(), SongDetailActivity.class);
-                    intent.putParcelableArrayListExtra(Constant.SONG_LIST_EXTRA_KEY,(ArrayList<Song>)songList) ;
-                    intent.putExtra(Constant.SONG_POSITION_EXTRA_KEY,getAdapterPosition()) ;
+                    intent.putParcelableArrayListExtra(Constant.SONG_LIST_EXTRA_KEY, (ArrayList<Song>) songList);
+                    intent.putExtra(Constant.SONG_POSITION_EXTRA_KEY, getAdapterPosition());
                     v.getContext().startActivity(intent);
                 }
             });

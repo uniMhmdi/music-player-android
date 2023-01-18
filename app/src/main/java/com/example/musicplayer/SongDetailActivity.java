@@ -144,64 +144,66 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
 
                     updateSeekBarTime(mediaPlayer.getDuration(), durationTv);
 
-                    timer.scheduleAtFixedRate(new TimerTask() {
-                        @Override
-                        public void run() {
-                            runOnUiThread(() -> {
-                                appCompatSeekBar.setProgress(mediaPlayer.getCurrentPosition());
+                    if (timer != null) {
+                        timer.scheduleAtFixedRate(new TimerTask() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(() -> {
+                                    appCompatSeekBar.setProgress(mediaPlayer.getCurrentPosition());
 
-                                updateSeekBarTime(mediaPlayer.getCurrentPosition(), currentDurationTv);
+                                    updateSeekBarTime(mediaPlayer.getCurrentPosition(), currentDurationTv);
 
-                                if (durationTv.getText().equals(currentDurationTv.getText())) {
-                                    playNextSong(mediaPlayer);
-                                }
-                            });
-
-                        }
-                    }, 1000, 1000);
-
-                    mediaPlayer.start();
-                    playPauseIb.setImageResource(R.drawable.ic_pause);
-
-                    appCompatSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                        @Override
-                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                            if (fromUser) {
-                                mediaPlayer.seekTo(progress);
-                                updateSeekBarTime(mediaPlayer.getCurrentPosition(), currentDurationTv);
+                                    if (durationTv.getText().equals(currentDurationTv.getText())) {
+                                        playNextSong(mediaPlayer);
+                                    }
+                                });
 
                             }
-                        }
+                        }, 1000, 1000);
 
-                        @Override
-                        public void onStartTrackingTouch(SeekBar seekBar) {
+                        mediaPlayer.start();
+                        playPauseIb.setImageResource(R.drawable.ic_pause);
 
-                        }
+                        appCompatSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                            @Override
+                            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                                if (fromUser) {
+                                    mediaPlayer.seekTo(progress);
+                                    updateSeekBarTime(mediaPlayer.getCurrentPosition(), currentDurationTv);
 
-                        @Override
-                        public void onStopTrackingTouch(SeekBar seekBar) {
+                                }
+                            }
 
-                        }
-                    });
+                            @Override
+                            public void onStartTrackingTouch(SeekBar seekBar) {
 
-                    prevIv.setOnClickListener(v -> {
-                        playPrevSong(mediaPlayer);
-                    });
+                            }
 
-                    nextIv.setOnClickListener(v -> {
-                        playNextSong(mediaPlayer);
-                    });
+                            @Override
+                            public void onStopTrackingTouch(SeekBar seekBar) {
 
-                    playPauseIb.setOnClickListener(v -> {
-                        if (mediaPlayer.isPlaying()) {
-                            mediaPlayer.pause();
-                            playPauseIb.setImageResource(R.drawable.ic_play);
-                        } else {
-                            mediaPlayer.start();
-                            playPauseIb.setImageResource(R.drawable.ic_pause);
-                        }
-                    });
+                            }
+                        });
 
+                        prevIv.setOnClickListener(v -> {
+                            playPrevSong(mediaPlayer);
+                        });
+
+                        nextIv.setOnClickListener(v -> {
+                            playNextSong(mediaPlayer);
+                        });
+
+                        playPauseIb.setOnClickListener(v -> {
+                            if (mediaPlayer.isPlaying()) {
+                                mediaPlayer.pause();
+                                playPauseIb.setImageResource(R.drawable.ic_play);
+                            } else {
+                                mediaPlayer.start();
+                                playPauseIb.setImageResource(R.drawable.ic_pause);
+                            }
+                        });
+
+                    }
                 }
             });
         } catch (IOException e) {
@@ -229,6 +231,7 @@ public class SongDetailActivity extends AppCompatActivity implements View.OnClic
     private void releaseTimerTask() {
         timer.cancel();
         timer.purge();
+        timer = null;
     }
 
     private void playPrevSong(MediaPlayer mediaPlayer) {

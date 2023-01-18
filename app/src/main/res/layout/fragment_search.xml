@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_purple"
+    android:background="@color/dark_blue"
     android:orientation="vertical"
     tools:context=".SearchFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_55sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/solomon_sans_bold"
         android:gravity="center"
         android:text="Search"
@@ -28,15 +28,17 @@
         android:drawableStart="@drawable/ic_search_24"
         android:drawablePadding="@dimen/_10sdp"
         android:hint="Music, Lyrics, Artist"
+        android:maxLines="1"
         android:paddingStart="@dimen/_10sdp"
         android:paddingEnd="@dimen/_10sdp"
+        android:textColor="@color/white"
         android:textColorHint="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:padding="@dimen/_20sdp" />
 
 

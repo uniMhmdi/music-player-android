@@ -1,6 +1,7 @@
 package com.example.musicplayer.api;
 
 import com.example.musicplayer.models.ArtistsResponse;
+import com.example.musicplayer.models.SearchResponse;
 import com.example.musicplayer.models.Song;
 import com.example.musicplayer.models.SongsResponse;
 
@@ -26,8 +27,12 @@ public interface RetrofitInterface {
     @GET("v1/song/top/week/0/100")
     Call<SongsResponse> getTopWeekSongs();
 
-    // get top week songs
+    // get song bt id
     @GET("v1/song/{id}")
     Call<Song> getLyricSong(@Path("id") String songId);
+
+    // search by user input
+    @GET("v1/search/query/{keyword}/0/50")
+    Call<SearchResponse> search(@Path("keyword") String keyword);
 
 }
