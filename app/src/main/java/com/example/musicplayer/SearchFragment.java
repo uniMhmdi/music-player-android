@@ -37,6 +37,9 @@ public class SearchFragment extends Fragment {
     private RecyclerView searchRv;
     private SongAdapter searchAdapter;
     private EditText searchEt;
+    public static String ARTIST_NAME_KEY;
+    private String artistName;
+    private boolean isFromHomePage;
 
     public SearchFragment() {
 
@@ -48,10 +51,22 @@ public class SearchFragment extends Fragment {
         return fragment;
     }
 
+    public static SearchFragment newInstance(String artistName) {
+        SearchFragment fragment = new SearchFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(ARTIST_NAME_KEY, artistName);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (getArguments() != null && getArguments().getString(ARTIST_NAME_KEY) != null) {
+            isFromHomePage = true;
+            artistName = getArguments().getString(ARTIST_NAME_KEY);
+        }
     }
 
     @Override
@@ -80,6 +95,10 @@ public class SearchFragment extends Fragment {
 
             }
         });
+
+        if (isFromHomePage) {
+            searchEt.setText(artistName);
+        }
 
     }
 

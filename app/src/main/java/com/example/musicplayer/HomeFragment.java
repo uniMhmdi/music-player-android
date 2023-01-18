@@ -41,13 +41,15 @@ public class HomeFragment extends Fragment {
     private ArtistAdapter trendingAdapter;
     private SongAdapter topDayAdapter;
     private SongAdapter topWeekAdapter;
+    private HomeActivity.OnTrendArtistClicked onTrendArtistClicked;
 
-    public HomeFragment() {
+    public HomeFragment(HomeActivity.OnTrendArtistClicked onTrendArtistClicked) {
+        this.onTrendArtistClicked = onTrendArtistClicked;
     }
 
 
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
+    public static HomeFragment newInstance(HomeActivity.OnTrendArtistClicked onTrendArtistClicked) {
+        HomeFragment fragment = new HomeFragment(onTrendArtistClicked);
         return fragment;
     }
 
@@ -148,14 +150,12 @@ public class HomeFragment extends Fragment {
         topDayRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         topWeekRv.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         latestAdapter = new SongAdapter(new ArrayList<>());
-        trendingAdapter = new ArtistAdapter(new ArrayList<>());
+        trendingAdapter = new ArtistAdapter(new ArrayList<>(), onTrendArtistClicked);
         topDayAdapter = new SongAdapter(new ArrayList<>());
         topWeekAdapter = new SongAdapter(new ArrayList<>());
         latestRv.setAdapter(latestAdapter);
         trendingRv.setAdapter(trendingAdapter);
         topDayRv.setAdapter(topDayAdapter);
         topWeekRv.setAdapter(topWeekAdapter);
-
-
     }
 }

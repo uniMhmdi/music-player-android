@@ -6,6 +6,7 @@
     android:background="@color/dark_blue">
 
     <TextView
+        android:layout_marginTop="@dimen/_35sdp"
         android:id="@+id/tv_text_lyrics"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +14,7 @@
         android:background="@color/dark_purple"
         android:fontFamily="@font/solomon_sans_bold"
         android:gravity="center"
-        android:padding="25dp"
+        android:padding="@dimen/_30sdp"
         android:textColor="@color/white"
         tools:text="بیا کنارم بیا که پیش تو دلخوشیام همه ادامه دارن\nچی میشه راهتو کج کنی اینوری سالی یه بارم\nسری که توش پر از فکر توئه بگو کجا بذارم\n\nباش تا بیام \nفدا سرت همه بهم میگن غرورتو پاش دادیا\nفدا سرت اگه دلت گرفت تو اشکتو لوش دادیا\nاصلا زمین و آسمون میخوان تو هم به من پشت کنیا\n\nعشقم باش تا بیام \nفدا سرت همه بهم میگن غرورتو پاش دادیا\nفدا سرت اگه دلت گرفت تو اشکتو لوش دادیا\nاصلا زمین و آسمون میخوان تو هم به من پشت کنیا\n\nببین دیوونتو \nهمه جارو آدما رو دیده و فقط به تو رو کرده\nمیخونه پرندمون خب عطر روی میزتو بو کرده\nمث من بی هم نفس به این قفس ورودو ممنوع کرده\n\nعشقم باش تا بیام \nفدا سرت همه بهم میگن غرورتو پاش دادیا\nفدا سرت اگه دلت گرفت تو اشکتو لوش دادیا\nاصلا زمین و آسمون میخوان تو هم به من پشت ">
 

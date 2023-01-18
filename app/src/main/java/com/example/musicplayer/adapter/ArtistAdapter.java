@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicplayer.HomeActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.models.TrendArtist;
 import com.squareup.picasso.Picasso;
@@ -18,9 +19,11 @@ import java.util.List;
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
 
     private List<TrendArtist> artistList;
+    private HomeActivity.OnTrendArtistClicked onTrendArtistClicked;
 
-    public ArtistAdapter(List<TrendArtist> songList) {
+    public ArtistAdapter(List<TrendArtist> songList, HomeActivity.OnTrendArtistClicked onTrendArtistClicked) {
         this.artistList = songList;
+        this.onTrendArtistClicked = onTrendArtistClicked;
     }
 
     @NonNull
@@ -63,15 +66,12 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             downloadCountTv = itemView.findViewById(R.id.tv_download_count);
             followersTv = itemView.findViewById(R.id.tv_followers);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(itemView.getContext(), SongDetailActivity.class);
-//                    intent.putParcelableArrayListExtra(Constant.SONG_LIST_EXTRA_KEY,(ArrayList<Song>)artistList) ;
-//                    intent.putExtra(Constant.SONG_POSITION_EXTRA_KEY,getAdapterPosition()) ;
-//                    v.getContext().startActivity(intent);
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onTrendArtistClicked.onClick(artistNameTv.getText().toString());
+                }
+            });
         }
     }
 }
