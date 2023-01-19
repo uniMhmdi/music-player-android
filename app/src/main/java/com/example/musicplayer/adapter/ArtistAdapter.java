@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.musicplayer.HomeActivity;
+import com.example.musicplayer.activity.HomeActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.models.TrendArtist;
 import com.squareup.picasso.Picasso;

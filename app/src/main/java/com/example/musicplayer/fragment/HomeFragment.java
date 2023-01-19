@@ -1,4 +1,4 @@
-package com.example.musicplayer;
+package com.example.musicplayer.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicplayer.R;
+import com.example.musicplayer.activity.HomeActivity;
 import com.example.musicplayer.adapter.ArtistAdapter;
 import com.example.musicplayer.adapter.SongAdapter;
 import com.example.musicplayer.api.RetrofitClient;

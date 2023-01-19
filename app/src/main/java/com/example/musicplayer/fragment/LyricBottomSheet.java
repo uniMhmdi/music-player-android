@@ -1,4 +1,4 @@
-package com.example.musicplayer;
+package com.example.musicplayer.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.musicplayer.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 

@@ -1,4 +1,4 @@
-package com.example.musicplayer;
+package com.example.musicplayer.adapter;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSeekBar;
 
+import com.example.musicplayer.fragment.LyricBottomSheet;
+import com.example.musicplayer.R;
 import com.example.musicplayer.api.RetrofitClient;
 import com.example.musicplayer.api.RetrofitInterface;
 import com.example.musicplayer.models.Song;

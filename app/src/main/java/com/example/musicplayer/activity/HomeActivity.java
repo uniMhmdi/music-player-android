@@ -1,4 +1,4 @@
-package com.example.musicplayer;
+package com.example.musicplayer.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.musicplayer.fragment.HomeFragment;
+import com.example.musicplayer.R;
+import com.example.musicplayer.fragment.SearchFragment;
 import com.example.musicplayer.api.RetrofitClient;
 import com.example.musicplayer.api.RetrofitInterface;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

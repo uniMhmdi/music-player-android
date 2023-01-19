@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer.R;
-import com.example.musicplayer.SongDetailActivity;
 import com.example.musicplayer.models.Song;
 import com.example.musicplayer.utils.Constant;
 import com.squareup.picasso.Picasso;
