@@ -29,7 +29,7 @@
         android:id="@+id/view1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#eeeeee"
+        android:background="@color/gray"
         android:backgroundTint="@color/dark_purple"
         app:layout_constraintBottom_toTopOf="@id/view_supporter_for_cover"
         app:layout_constraintEnd_toStartOf="@id/view_supporter_for_cover"
@@ -40,7 +40,7 @@
         android:id="@+id/view2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#eeeeee"
+        android:background="@color/gray"
         android:backgroundTint="@color/dark_purple"
         app:layout_constraintBottom_toTopOf="@id/view_supporter_for_background"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +126,7 @@
             android:contentDescription="@string/app_name"
             android:fontFamily="@font/solomon_sans_bold"
             android:gravity="center"
-            android:text="Lyrics"
+            android:text="@string/lyrics"
             android:textColor="@color/white"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold"
@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/solomon_sans_bold"
-                android:text="Release Date"
+                android:text="@string/release_date"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_13sdp" />
 
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16sdp"
                 android:fontFamily="@font/solomon_sans_bold"
-                android:text="Total Play"
+                android:text="@string/total_play"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_13sdp" />
 

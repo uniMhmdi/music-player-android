@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_8sdp"
             android:layout_marginTop="@dimen/_17sdp"
-            android:layout_toRightOf="@id/container"
+            android:layout_toEndOf="@id/container"
             android:orientation="vertical">
 
             <TextView

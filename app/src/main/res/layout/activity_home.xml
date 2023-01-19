@@ -15,7 +15,7 @@
         android:background="@color/dark_purple"
         android:fontFamily="@font/solomon_sans_bold"
         android:gravity="center"
-        android:text="Melobit"
+        android:text="@string/melobit"
         android:textColor="@color/white"
         android:textSize="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="parent"

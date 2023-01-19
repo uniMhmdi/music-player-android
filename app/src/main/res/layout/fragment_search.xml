@@ -27,7 +27,7 @@
         android:background="@drawable/edit_text_background"
         android:drawableStart="@drawable/ic_search_24"
         android:drawablePadding="@dimen/_10sdp"
-        android:hint="Music, Lyrics, Artist"
+        android:hint="@string/music_lyrics_artist"
         android:maxLines="1"
         android:paddingStart="@dimen/_10sdp"
         android:paddingEnd="@dimen/_10sdp"
